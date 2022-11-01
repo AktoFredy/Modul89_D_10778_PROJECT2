@@ -15,6 +15,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), SensorEventListener{
     private lateinit var sensorManager: SensorManager
@@ -78,7 +81,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener{
                 Color.RED
             }
             if(color == Color.RED){
-                sendNotification2()
+                    GlobalScope.launch {
+                        sendNotification2()
+                    }
             }
             square.setBackgroundColor(color)
 
@@ -112,7 +117,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener{
 
     private fun sendNotification2(){
         val title: String = "Accelerometer"
-        val content: String = "Ini Notification Untuk Accelerometer"
+        val content: String = "Selamat anda sudah berhasil Modul 8 dan 9"
 
         val builder = NotificationCompat.Builder(this, CHANNEL_ID_2)
             .setSmallIcon(R.drawable.ic_circle_notifications)
